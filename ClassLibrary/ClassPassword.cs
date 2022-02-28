@@ -29,10 +29,8 @@ namespace ClassLibrary
 
         public bool CorrectLogin() //Tjekker om login-oplysninger er korrekte
         {
-            if ((database.First() == username) & (database.Last() == password)) //.First() & .Last() tjekker hhv. arrayets første og sidste linje
-            {
-                return true;
-            }
+            if ((database.First() == username) & (database.Last() == password)) //.First() & .Last() tjekker hhv. arrayets første og sidste linje          
+                return true;            
             else
                 return false;
         }
