@@ -35,7 +35,7 @@ namespace Password
                 }
                 else
                     Console.WriteLine("Password should contain at least 1 special character, 1 number, 1 lowercase, 1 uppercase." +
-                        "\nIt also cannot contain any spaces or numbers in the begging or end.");
+                        "\nIt also cannot contain any spaces or numbers in the beginning or end.");
             }
             else //Hvis databasen findes (størrelse != 0)
             {
@@ -54,13 +54,15 @@ namespace Password
                                 Console.WriteLine("New password?");
                                 string changePassword = Console.ReadLine();
                                 ClassPassword newPassword = new ClassPassword(path, changePassword, username);
-                                if (newPassword.PasswordCheck()) //Hvis password kan godkendes bliver det oprettet i databasen (på en ny linje)
+                                if (newPassword.PasswordCheck()) //Hvis password opfylder kriterier bliver loginoplysninger i tekstfilen owerwrited
                                 {
-                                    using (StreamWriter line = File.AppendText(path))
+                                    using (StreamWriter line = File.CreateText(path))
                                     {
-                                        line.WriteLine(newPassword);
+                                        line.WriteLine(username + "\n" + changePassword); //changePassword bruges i stedet for newPassword, da
+                                                                                          //ClassPassword ikke er en string og dermed ikke kan læses af .WriteLine
                                     }
-                                    Console.WriteLine("\nNew password added");
+                                    Console.WriteLine("\nPassword changed");
+                                    Console.ReadKey();
                                 }
                                 else
                                     Console.WriteLine("Password should contain at least 1 special character, 1 number, 1 lowercase, 1 uppercase." +

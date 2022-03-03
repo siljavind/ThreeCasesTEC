@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions; //Regex
-using System.Globalization; //UnicodeCategory
 using System.IO; //database
+using System.Globalization; //UnicodeCategory
+using static System.Globalization.UnicodeCategory;
+
 
 namespace ClassLibrary
 {
@@ -73,17 +75,18 @@ namespace ClassLibrary
             else
                 return false;
         }
-        private bool Symbol() //UnicodeCategory - Ved at definere symboler kan sprogspecifikke og
-                              //diakritiske tegn tilføjes uden at registeres som specielle tegn (fx. ÆÅØ & á)
+    
+        private bool Symbol() //UnicodeCategory - Ved at definere symboler kan sprogspecifikke
+                              //og diakritiske tegn tilføjes uden at registeres som specielle tegn (fx. ÆÅØ & á)
         {
-            UnicodeCategory category = UnicodeCategory.CurrencySymbol & UnicodeCategory.MathSymbol & UnicodeCategory.ModifierSymbol & UnicodeCategory.OtherSymbol;
-
             foreach (char x in password)
-            {
-                if (CharUnicodeInfo.GetUnicodeCategory(x) == category)
-                    return true;
-            }
-            return false;
+            {                
+                UnicodeCategory y = CharUnicodeInfo.GetUnicodeCategory(x);
+                UnicodeCategory[] category = {CurrencySymbol, MathSymbol, OtherPunctuation, ModifierSymbol, OtherSymbol, OpenPunctuation, ClosePunctuation, DashPunctuation, ConnectorPunctuation };           
+                if (category.Contains(y))
+                    return true;               
+            }          
+                return false;
         }
         private bool StartEndNumber() //Regex - Regex101.com
         {
