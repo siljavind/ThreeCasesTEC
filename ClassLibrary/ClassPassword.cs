@@ -78,6 +78,7 @@ namespace ClassLibrary
     
         private bool Symbol() //UnicodeCategory - Ved at definere symboler kan sprogspecifikke
                               //og diakritiske tegn tilføjes uden at registeres som specielle tegn (fx. ÆÅØ & á)
+                              //Ikke den mest passende eller produktive måde at løse problemet på, men lærerigt
         {
             foreach (char x in password)
             {                
