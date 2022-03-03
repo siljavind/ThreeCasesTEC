@@ -67,7 +67,7 @@ namespace Password
                                 }
                                 else
                                     Console.WriteLine(wrongAns);
-                                Console.ReadKey();
+                                    Console.ReadKey();
                                 break;
 
                             case 'E':
