@@ -9,6 +9,8 @@ namespace Password
         static void Main(string[] args)
         {
             const string path = @"database.txt"; //constant, da stien ikke skal ændres
+            string wrongAns = "Password should contain at least 1 special character, 1 number, 1 lowercase, 1 uppercase." +
+                              "\nIt also cannot contain any spaces or numbers in the beginning or end.";
             string username;
             string password;
             char menu;
@@ -34,8 +36,7 @@ namespace Password
                     Console.WriteLine("New user added");
                 }
                 else
-                    Console.WriteLine("Password should contain at least 1 special character, 1 number, 1 lowercase, 1 uppercase." +
-                        "\nIt also cannot contain any spaces or numbers in the beginning or end.");
+                    Console.WriteLine(wrongAns);
             }
             else //Hvis databasen findes (størrelse != 0)
             {
@@ -65,8 +66,8 @@ namespace Password
                                     Console.ReadKey();
                                 }
                                 else
-                                    Console.WriteLine("Password should contain at least 1 special character, 1 number, 1 lowercase, 1 uppercase." +
-                                                      "\nIt also cannot contain any spaces or numbers in the begging or end.");
+                                    Console.WriteLine(wrongAns);
+                                Console.ReadKey();
                                 break;
 
                             case 'E':

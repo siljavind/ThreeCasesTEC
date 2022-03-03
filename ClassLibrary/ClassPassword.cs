@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions; //Regex
 using System.IO; //database
-using System.Globalization; //UnicodeCategory
-using static System.Globalization.UnicodeCategory;
+using System.Globalization;
+using static System.Globalization.UnicodeCategory; //For at muliggøre forkortelse af metoden Symbol()
 
 
 namespace ClassLibrary
@@ -76,15 +76,13 @@ namespace ClassLibrary
                 return false;
         }
     
-        private bool Symbol() //UnicodeCategory - Ved at definere symboler kan sprogspecifikke
-                              //og diakritiske tegn tilføjes uden at registeres som specielle tegn (fx. ÆÅØ & á)
-                              //Ikke den mest passende eller produktive måde at løse problemet på, men lærerigt
+        private bool Symbol() //UnicodeCategory - Hvert tegns unicode-kategori findes (en efter en) og sammenlignes med (de bestemte) UnicodeCategory.
+                              //Ikke nødvendigvis den mest passende eller produktive måde at løse problemet på, men lærerigt.
         {
             foreach (char x in password)
             {                
-                UnicodeCategory y = CharUnicodeInfo.GetUnicodeCategory(x);
                 UnicodeCategory[] category = {CurrencySymbol, MathSymbol, OtherPunctuation, ModifierSymbol, OtherSymbol, OpenPunctuation, ClosePunctuation, DashPunctuation, ConnectorPunctuation };           
-                if (category.Contains(y))
+                if (category.Contains(CharUnicodeInfo.GetUnicodeCategory(x)))
                     return true;               
             }          
                 return false;
