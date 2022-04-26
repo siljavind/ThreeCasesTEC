@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions; //Regex
 using System.IO; //database
 using System.Globalization;
@@ -32,7 +29,7 @@ namespace ClassLibrary
         public bool CorrectLogin() //Tjekker om login-oplysninger er korrekte
         {
             if ((database.First() == username) & (database.Last() == password)) //.First() & .Last() tjekker hhv. arrayets første og sidste linje          
-                return true;            
+                return true;
             else
                 return false;
         }
@@ -75,17 +72,17 @@ namespace ClassLibrary
             else
                 return false;
         }
-    
+
         private bool Symbol() //UnicodeCategory - Hvert tegns unicode-kategori findes (en efter en) og sammenlignes med (de bestemte) UnicodeCategory.
                               //Ikke nødvendigvis den mest passende eller produktive måde at løse problemet på, men lærerigt.
         {
             foreach (char x in password)
-            {                
-                UnicodeCategory[] category = {CurrencySymbol, MathSymbol, OtherPunctuation, ModifierSymbol, OtherSymbol, OpenPunctuation, ClosePunctuation, DashPunctuation, ConnectorPunctuation };           
+            {
+                UnicodeCategory[] category = { CurrencySymbol, MathSymbol, OtherPunctuation, ModifierSymbol, OtherSymbol, OpenPunctuation, ClosePunctuation, DashPunctuation, ConnectorPunctuation };
                 if (category.Contains(CharUnicodeInfo.GetUnicodeCategory(x)))
-                    return true;               
-            }          
-                return false;
+                    return true;
+            }
+            return false;
         }
         private bool StartEndNumber() //Regex - Regex101.com
         {

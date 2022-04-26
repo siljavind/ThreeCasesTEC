@@ -5,7 +5,7 @@ namespace Dance
 {
     public class Dance
     {
-        static void Main(string[] args)
+        static void Main()
         {
             DancerPoints.UltraConstructor();
         }
