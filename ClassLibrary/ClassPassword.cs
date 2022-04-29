@@ -33,6 +33,7 @@ namespace ClassLibrary
             else
                 return false;
         }
+
         public void NewUserToDatabase() //Ikke nødvendig, men del af tidligere plan
         {
             using (StreamWriter file = new StreamWriter(path, true)) //true stopper overwrite af data i tekstfil(database)
@@ -41,7 +42,6 @@ namespace ClassLibrary
                 file.WriteLine(password);
             }
         }
-
         public bool PasswordCheck() //Alle check-metoder samlet i én overordnet metode
         {
             if (Amount() & LowerUpper() & Symbol() & StartEndNumber() & NoSpaceCowboy() & Same())
